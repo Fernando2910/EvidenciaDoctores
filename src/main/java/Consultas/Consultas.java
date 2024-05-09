@@ -6,11 +6,14 @@
 package Consultas;
 
 import Vista.Menu;
+import com.toedter.calendar.JDateChooser;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -258,24 +261,25 @@ public class Consultas {
             JOptionPane.showMessageDialog(null, "No se pudo mostrar los registros: "+ e);
         }
     }
-    public void seleccionarPaciente(JTable jtableListaPaciente, JComboBox id, JTextField Nombre){
-        try{
-            int fila = jtableListaPaciente.getSelectedRow();
-            
-            if (fila >= 0){
-                id.setSelectedItem(jtableListaPaciente.getValueAt(fila, 0));
-                Nombre.setText((jtableListaPaciente.getValueAt(fila, 1).toString()));
-            }else{
-                JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+//    public void seleccionarPaciente(JTable jtableListaPaciente, JComboBox id, JTextField Nombre){
+//        try{
+//            int fila = jtableListaPaciente.getSelectedRow();
+//            
+//            if (fila >= 0){
+//                id.setSelectedItem((jtableListaPaciente.getValueAt(fila, 0)));
+//                Nombre.setText((jtableListaPaciente.getValueAt(fila, 1).toString()));
+//            }else{
+//                JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+//
+//            }
+//
+//            //JOptionPane.showMessageDialog(null, "Se dio de alta correctamente el doctor");
+//        }catch (Exception e){
+//            JOptionPane.showMessageDialog(null, "Error de seleccion, error: "+ e);
+//            
+//        }
+//    }
 
-            }
-
-            //JOptionPane.showMessageDialog(null, "Se dio de alta correctamente el doctor");
-        }catch (Exception e){
-            JOptionPane.showMessageDialog(null, "Error de seleccion, error: "+ e);
-            
-        }
-    }
     public void seleccionarPaciente2(JTable jtableListaPaciente, JTextField id, JTextField Nombre){
         try{
             int fila = jtableListaPaciente.getSelectedRow();
@@ -462,7 +466,65 @@ public class Consultas {
             JOptionPane.showMessageDialog(null, "No se pudo mostrar los registros: "+ e);
         }
     }
+//    public void seleccionarCita(JTable jtableListaCitas, JTextField idCita, JDateChooser dateChooser, JComboBox comboBoxHora, JTextField fieldDescripcion , JComboBox comboBoxIdDoctor, JComboBox comboBoxIdPaciente) {
+////            public void seleccionarCita(JTable jtableListaCitas, JTextField idCita, JTextField fieldDescripcion, JComboBox comboBoxIdDoctor, JDateChooser dateChooser, JComboBox comboBoxHora, JTextField fieldDescripcionOutput) {
+//
+//        try {
+//            int fila = jtableListaCitas.getSelectedRow();
+//
+//            if (fila >= 0) {
+//                idCita.setText(jtableListaCitas.getValueAt(fila, 0).toString());
+//                // Obtener la fecha de la tabla y establecerla en el JDateChooser
+//                Date fecha = (Date) jtableListaCitas.getValueAt(fila, 1);
+//                dateChooser.setDate(fecha);
+//                // Establecer la hora en el JComboBox de hora
+//                comboBoxHora.setSelectedItem(jtableListaCitas.getValueAt(fila, 2));
+//                // Establecer la descripción en el JTextField
+//                fieldDescripcion.setText(jtableListaCitas.getValueAt(fila, 3).toString());
+//                // Establecer otro campo de descripción si es necesario
+//                comboBoxIdDoctor.setSelectedItem(jtableListaCitas.getValueAt(fila, 4));
+//                // Seleccionar un ítem en el JComboBox de ID si es necesario
+//                comboBoxIdPaciente.setSelectedItem(jtableListaCitas.getValueAt(fila, 5));
+//                // Obtener la fecha de la tabla y establecerla en el JDateChooser
+//            } else {
+//                JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+//            }
+//        } catch (Exception e) {
+//            JOptionPane.showMessageDialog(null, "Error de seleccion, error: " + e);
+//            System.out.println("Error de seleccion, error: " + e);
+//
+//        }
+//    }
+    public void seleccionarCita(JTable jtableListaCitas, JTextField idCita, JDateChooser dateChooser, JComboBox comboBoxHora, JTextField fieldDescripcion, JComboBox comboBoxIdDoctor, JComboBox comboBoxIdPaciente) {
+    try {
+        int fila = jtableListaCitas.getSelectedRow();
 
-
-
+        if (fila >= 0) {
+            idCita.setText(jtableListaCitas.getValueAt(fila, 0).toString());
+            
+            // Obtener la fecha de la tabla como un String y convertirla a Date
+            String fechaString = (String) jtableListaCitas.getValueAt(fila, 1);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date fecha = dateFormat.parse(fechaString);
+            dateChooser.setDate(fecha);
+            
+            // Establecer la hora en el JComboBox de hora
+            comboBoxHora.setSelectedItem(jtableListaCitas.getValueAt(fila, 2));
+            
+            // Establecer la descripción en el JTextField
+            fieldDescripcion.setText(jtableListaCitas.getValueAt(fila, 3).toString());
+            
+            // Establecer el ID del doctor en el JComboBox
+            comboBoxIdDoctor.setSelectedItem(jtableListaCitas.getValueAt(fila, 4));
+            
+            // Establecer el ID del paciente en el JComboBox
+            comboBoxIdPaciente.setSelectedItem(jtableListaCitas.getValueAt(fila, 5));
+        } else {
+            JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error de seleccion, error: " + e);
+        System.out.println("Error de seleccion, error: " + e);
+    }
+}   
 }

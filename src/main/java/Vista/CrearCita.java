@@ -82,8 +82,6 @@ public class CrearCita extends javax.swing.JFrame {
         fieldIdCita = new javax.swing.JTextField();
         dateChooser = new com.toedter.calendar.JDateChooser();
         btnCrearCita = new javax.swing.JButton();
-        btnModificarCita = new javax.swing.JButton();
-        btnEliminarCita = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         fieldDescripcion = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -112,20 +110,6 @@ public class CrearCita extends javax.swing.JFrame {
         btnCrearCita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCrearCitaActionPerformed(evt);
-            }
-        });
-
-        btnModificarCita.setText("Modificar Cita");
-        btnModificarCita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarCitaActionPerformed(evt);
-            }
-        });
-
-        btnEliminarCita.setText("Eliminar Cita");
-        btnEliminarCita.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarCitaActionPerformed(evt);
             }
         });
 
@@ -178,16 +162,10 @@ public class CrearCita extends javax.swing.JFrame {
                             .addComponent(comboBoxIdDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(fieldDescripcion))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(btnModificarCita)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnEliminarCita, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)))
+                        .addComponent(fieldDescripcion)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(143, 143, 143)
+                .addGap(133, 133, 133)
                 .addComponent(btnCrearCita, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -215,14 +193,10 @@ public class CrearCita extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldDescripcion)
-                .addGap(12, 12, 12)
+                .addComponent(fieldDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(btnCrearCita)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnModificarCita)
-                    .addComponent(btnEliminarCita))
-                .addContainerGap())
+                .addGap(23, 23, 23))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Citas"));
@@ -311,7 +285,7 @@ public class CrearCita extends javax.swing.JFrame {
         // TODO add your handling code here:
         Consultas consultas = new Consultas();
 
-        consultas.seleccionarPaciente(jtableListaCitas, comboBoxIdPaciente, fieldDescripcion);
+        consultas.seleccionarCita(jtableListaCitas, fieldIdCita, dateChooser, comboBoxHora, fieldDescripcion, comboBoxIdDoctor, comboBoxIdPaciente);
         consultas.MostrarCita(jtableListaCitas);
     }//GEN-LAST:event_jtableListaCitasMouseClicked
 
@@ -346,18 +320,6 @@ public class CrearCita extends javax.swing.JFrame {
     private void comboBoxIdDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxIdDoctorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxIdDoctorActionPerformed
-
-    private void btnEliminarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCitaActionPerformed
-        // TODO add your handling code here:
-        Consultas consultas = new Consultas();
-        consultas.MostrarCita(jtableListaCitas);
-    }//GEN-LAST:event_btnEliminarCitaActionPerformed
-
-    private void btnModificarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCitaActionPerformed
-        // TODO add your handling code here:
-        Consultas consultas = new Consultas();
-        consultas.MostrarCita(jtableListaCitas);
-    }//GEN-LAST:event_btnModificarCitaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -396,9 +358,7 @@ public class CrearCita extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearCita;
-    private javax.swing.JButton btnEliminarCita;
     private javax.swing.JButton btnMenu;
-    private javax.swing.JButton btnModificarCita;
     private javax.swing.JComboBox<String> comboBoxHora;
     private javax.swing.JComboBox<String> comboBoxIdDoctor;
     private javax.swing.JComboBox<String> comboBoxIdPaciente;
