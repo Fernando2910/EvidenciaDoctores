@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -257,7 +258,25 @@ public class Consultas {
             JOptionPane.showMessageDialog(null, "No se pudo mostrar los registros: "+ e);
         }
     }
-    public void seleccionarPaciente(JTable jtableListaPaciente, JTextField id, JTextField Nombre){
+    public void seleccionarPaciente(JTable jtableListaPaciente, JComboBox id, JTextField Nombre){
+        try{
+            int fila = jtableListaPaciente.getSelectedRow();
+            
+            if (fila >= 0){
+                id.setSelectedItem(jtableListaPaciente.getValueAt(fila, 0));
+                Nombre.setText((jtableListaPaciente.getValueAt(fila, 1).toString()));
+            }else{
+                JOptionPane.showMessageDialog(null, "Fila no seleccionada");
+
+            }
+
+            //JOptionPane.showMessageDialog(null, "Se dio de alta correctamente el doctor");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Error de seleccion, error: "+ e);
+            
+        }
+    }
+    public void seleccionarPaciente2(JTable jtableListaPaciente, JTextField id, JTextField Nombre){
         try{
             int fila = jtableListaPaciente.getSelectedRow();
             
@@ -299,4 +318,151 @@ public class Consultas {
             JOptionPane.showMessageDialog(null, "Error al actualizar el paciente: " + e.getMessage());
         }
     }
+    public boolean verificarDisponibilidad(String fecha, String hora) {
+        // Construir la consulta SQL para verificar la disponibilidad
+        String sql = "SELECT COUNT(*) FROM cita WHERE fecha_cita = ? AND hora = ?";
+
+        Conexion.CConexion conectar = new Conexion.CConexion();
+        Connection con = conectar.getConexion();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            // Establecer los parámetros de la consulta
+            ps.setString(1, fecha);
+            ps.setString(2, hora);
+
+            // Ejecutar la consulta
+            ResultSet rs = ps.executeQuery();
+
+            // Verificar si hay alguna fila en el resultado
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                if (count > 0) {
+                    // La fecha y hora están ocupadas, mostrar mensaje de error
+                    JOptionPane.showMessageDialog(null, "La fecha y hora seleccionadas ya están ocupadas. Por favor, elige otra fecha o hora.");
+                    return false;
+                } else {
+                    // La fecha y hora están disponibles, mostrar mensaje de disponibilidad
+                    JOptionPane.showMessageDialog(null, "La fecha y hora seleccionadas están disponibles.");
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al verificar disponibilidad: " + e.getMessage());
+            System.out.println("Error al verificar disponibilidad: " + e.getMessage());
+        } finally {
+            // Cerrar la conexión
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + ex.getMessage());
+                }
+            }
+        }
+
+        // En caso de error o excepción, asumimos que la fecha y hora no están disponibles
+        return false;
+    }
+    
+    public boolean insertarCita(String fecha, String hora, String descripcion, String id_doctor, String id_Paciente) {
+        // Construir la consulta SQL para insertar la cita
+        String sql = "INSERT INTO cita (fecha_cita, hora, motivo_cita, id_doctor, id_paciente) VALUES (?, ?, ?, ?, ?)";
+
+        Conexion.CConexion conectar = new Conexion.CConexion();
+        Connection con = conectar.getConexion();
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            // Establecer los parámetros de la consulta
+            ps.setString(1, fecha);
+            ps.setString(2, hora);
+            ps.setString(3, descripcion);
+            ps.setString(4, id_doctor);
+            ps.setString(5, id_Paciente);
+
+            // Ejecutar la consulta
+            int filasAfectadas = ps.executeUpdate();
+
+            // Verificar si la inserción fue exitosa
+            if (filasAfectadas > 0) {
+                JOptionPane.showMessageDialog(null, "La cita se ha creado correctamente.");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo crear la cita.");
+                return false;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al insertar la cita: " + e.getMessage());
+            System.out.println("Error al insertar la cita: " + e.getMessage());
+        } finally {
+            // Cerrar la conexión
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Error al cerrar la conexión: " + ex.getMessage());
+                }
+            }
+        }
+
+        // En caso de error o excepción, retornar false
+        return false;
+    }
+    public void MostrarCita(JTable jtableListaPaciente){
+        Conexion.CConexion conectar = new Conexion.CConexion();
+        
+        Connection con = conectar.getConexion();
+        
+        DefaultTableModel model = new DefaultTableModel();
+        
+        TableRowSorter<TableModel> OrdenarTabla = new TableRowSorter<TableModel>(model);
+        jtableListaPaciente.setRowSorter(OrdenarTabla);
+        
+        String sql = "";
+        
+        model.addColumn("Id Cita");
+        model.addColumn("Fecha");
+        model.addColumn("Hora");
+        model.addColumn("Motivo");
+        model.addColumn("Id Doctor");
+        model.addColumn("Id Paciente");
+
+
+        
+        jtableListaPaciente.setModel(model);
+        
+        sql = "Select * from cita";
+        
+        String [] datos = new String[6];
+        
+        Statement st;
+
+        try{
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()){
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                datos[4] = rs.getString(5);
+                datos[5] = rs.getString(6);
+                
+                model.addRow(datos);
+
+            }
+                // Asignamos el modelo a la JTable que recibimos como parámetro
+            jtableListaPaciente.setModel(model);
+
+            //JOptionPane.showMessageDialog(null, "Se dio de alta correctamente el doctor");
+        }catch (Exception e){
+            JOptionPane.showMessageDialog(null, "No se pudo mostrar los registros: "+ e);
+        }
+    }
+
+
+
 }

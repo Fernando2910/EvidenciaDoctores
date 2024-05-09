@@ -6,6 +6,7 @@
 package Vista;
 
 import Consultas.Consultas;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -233,8 +234,10 @@ public class AltaPaciente extends javax.swing.JFrame {
 
     private void jtableListaPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableListaPacienteMouseClicked
         // TODO add your handling code here:
+         // TODO add your handling code here:
         Consultas consultas = new Consultas();
-        consultas.seleccionarPaciente(jtableListaPaciente, fieldIdPaciente, fieldNombrePaciente);
+        
+        consultas.seleccionarPaciente2(jtableListaPaciente, fieldIdPaciente, fieldNombrePaciente);
     }//GEN-LAST:event_jtableListaPacienteMouseClicked
 
     /**

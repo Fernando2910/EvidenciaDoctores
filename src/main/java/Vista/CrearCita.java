@@ -5,6 +5,15 @@
  */
 package Vista;
 
+import Consultas.Consultas;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Fer
@@ -16,6 +25,45 @@ public class CrearCita extends javax.swing.JFrame {
      */
     public CrearCita() {
         initComponents();
+        
+        Consultas consultas = new Consultas();
+        consultas.MostrarCita(jtableListaCitas);
+        PreparedStatement ps;
+        ResultSet rs;
+        Conexion.CConexion conectar = new Conexion.CConexion();
+        Connection con = conectar.getConexion();
+
+        try {
+            String sql = "SELECT id_doctor FROM doctores";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            comboBoxIdDoctor.addItem("Selecciona el doctor");
+
+            while (rs.next()) {
+                comboBoxIdDoctor.addItem(rs.getString("id_doctor"));
+            }
+
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        
+        try {
+            String sql = "SELECT id_paciente FROM pacientes";
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            comboBoxIdPaciente.addItem("Selecciona el paciente");
+
+            while (rs.next()) {
+                comboBoxIdPaciente.addItem(rs.getString("id_paciente"));
+            }
+
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     /**
@@ -28,35 +76,190 @@ public class CrearCita extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        fieldIdCita = new javax.swing.JTextField();
+        dateChooser = new com.toedter.calendar.JDateChooser();
+        btnCrearCita = new javax.swing.JButton();
+        btnModificarCita = new javax.swing.JButton();
+        btnEliminarCita = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        fieldDescripcion = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        comboBoxHora = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        comboBoxIdDoctor = new javax.swing.JComboBox<>();
+        comboBoxIdPaciente = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtableListaCitas = new javax.swing.JTable();
         btnMenu = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Cita:"));
 
+        jLabel1.setText("Id Paciente:");
+
+        jLabel2.setText("Fecha:");
+
+        jLabel3.setText("Id Cita:");
+
+        dateChooser.setDateFormatString("yyyy/MM/dd");
+
+        btnCrearCita.setText("Crear Cita");
+        btnCrearCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearCitaActionPerformed(evt);
+            }
+        });
+
+        btnModificarCita.setText("Modificar Cita");
+        btnModificarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarCitaActionPerformed(evt);
+            }
+        });
+
+        btnEliminarCita.setText("Eliminar Cita");
+        btnEliminarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCitaActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Descripción:");
+
+        jLabel5.setText("Hora:");
+
+        comboBoxHora.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30" }));
+
+        jLabel6.setText("Id Doctor:");
+
+        comboBoxIdDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxIdDoctorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 285, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboBoxHora, 0, 92, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(comboBoxIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fieldIdCita, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel3))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(74, 74, 74))
+                            .addComponent(comboBoxIdDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(fieldDescripcion))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(btnModificarCita)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEliminarCita, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(143, 143, 143)
+                .addComponent(btnCrearCita, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fieldIdCita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxIdDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fieldDescripcion)
+                .addGap(12, 12, 12)
+                .addComponent(btnCrearCita)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnModificarCita)
+                    .addComponent(btnEliminarCita))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Citas"));
+
+        jtableListaCitas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jtableListaCitas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtableListaCitasMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtableListaCitas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 385, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(53, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 355, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         btnMenu.setText("Menu");
@@ -71,14 +274,16 @@ public class CrearCita extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnMenu)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(btnMenu))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,6 +306,58 @@ public class CrearCita extends javax.swing.JFrame {
         objectMenu.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
+
+    private void jtableListaCitasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableListaCitasMouseClicked
+        // TODO add your handling code here:
+        Consultas consultas = new Consultas();
+
+        consultas.seleccionarPaciente(jtableListaCitas, comboBoxIdPaciente, fieldDescripcion);
+        consultas.MostrarCita(jtableListaCitas);
+    }//GEN-LAST:event_jtableListaCitasMouseClicked
+
+    private void btnCrearCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCitaActionPerformed
+        // TODO add your handling code here:
+        Date fechaSeleccionada = dateChooser.getDate();
+
+        // Formatear la fecha como una cadena en el formato "yyyy-MM-dd"
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String fecha = sdf.format(fechaSeleccionada);
+
+        // Obtener la hora seleccionada del comboBoxHora
+        String hora = comboBoxHora.getSelectedItem().toString();
+        String id_doctor = comboBoxIdDoctor.getSelectedItem().toString();
+        String id_Paciente = comboBoxIdPaciente.getSelectedItem().toString();
+        String id_Cita = fieldIdCita.getText();
+        String descripcion = fieldDescripcion.getText();
+
+        // Verificar la disponibilidad de la cita
+        Consultas consultas = new Consultas();
+        boolean disponible = consultas.verificarDisponibilidad(fecha, hora);
+        
+        if(disponible != false){
+            consultas.insertarCita(fecha,hora,descripcion,id_Paciente , id_doctor);
+        }else{
+            
+        }
+        consultas.MostrarCita(jtableListaCitas);
+
+    }//GEN-LAST:event_btnCrearCitaActionPerformed
+
+    private void comboBoxIdDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxIdDoctorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxIdDoctorActionPerformed
+
+    private void btnEliminarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCitaActionPerformed
+        // TODO add your handling code here:
+        Consultas consultas = new Consultas();
+        consultas.MostrarCita(jtableListaCitas);
+    }//GEN-LAST:event_btnEliminarCitaActionPerformed
+
+    private void btnModificarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarCitaActionPerformed
+        // TODO add your handling code here:
+        Consultas consultas = new Consultas();
+        consultas.MostrarCita(jtableListaCitas);
+    }//GEN-LAST:event_btnModificarCitaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,8 +395,25 @@ public class CrearCita extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCrearCita;
+    private javax.swing.JButton btnEliminarCita;
     private javax.swing.JButton btnMenu;
+    private javax.swing.JButton btnModificarCita;
+    private javax.swing.JComboBox<String> comboBoxHora;
+    private javax.swing.JComboBox<String> comboBoxIdDoctor;
+    private javax.swing.JComboBox<String> comboBoxIdPaciente;
+    private com.toedter.calendar.JDateChooser dateChooser;
+    private javax.swing.JTextField fieldDescripcion;
+    private javax.swing.JTextField fieldIdCita;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jtableListaCitas;
     // End of variables declaration//GEN-END:variables
 }
