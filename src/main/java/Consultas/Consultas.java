@@ -276,7 +276,7 @@ public class Consultas {
         }
     }
     public void ActualizarPaciente (String id, String Nombre){
-        String sql = "UPDATE pacientes SET nombre = ? WHERE id_paciente = ?";
+        String sql = "UPDATE pacientes SET nombre_completo = ? WHERE id_paciente = ?";
 
         Conexion.CConexion conectar = new Conexion.CConexion();
         Connection con = conectar.getConexion();

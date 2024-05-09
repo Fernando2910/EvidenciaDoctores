@@ -18,6 +18,8 @@ public class AltaPaciente extends javax.swing.JFrame {
      */
     public AltaPaciente() {
         initComponents();
+        Consultas consultas = new Consultas();
+        consultas.MostrarPaciente(jtableListaPaciente);
     }
 
     /**
@@ -43,7 +45,7 @@ public class AltaPaciente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Doctores"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos Pacientes"));
 
         jLabel1.setText("Nombre:");
 
@@ -124,7 +126,7 @@ public class AltaPaciente extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista Doctores"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista Pacientes"));
 
         jtableListaPaciente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
