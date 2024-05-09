@@ -242,6 +242,8 @@ public class AltaDoctor extends javax.swing.JFrame {
         String especialidad = fieldEspecialidad.getText();
         
         consultas.ActualizarDoctor(id, nombre, especialidad);
+        consultas.MostrarDoctores(jtableListaDoctores);
+
     }//GEN-LAST:event_btnActualizarDatosDoctorActionPerformed
 
     private void fieldDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDoctorActionPerformed
