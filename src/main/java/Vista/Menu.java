@@ -28,6 +28,9 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         btnCerrarSesion = new javax.swing.JButton();
+        btnAltaDoctor = new javax.swing.JButton();
+        btnAltaPaciente = new javax.swing.JButton();
+        btnCrearCita = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,21 +41,47 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        btnAltaDoctor.setText("Alta Doctor");
+        btnAltaDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaDoctorActionPerformed(evt);
+            }
+        });
+
+        btnAltaPaciente.setText("Alta Paciente");
+        btnAltaPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAltaPacienteActionPerformed(evt);
+            }
+        });
+
+        btnCrearCita.setText("Crear cita");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(648, Short.MAX_VALUE)
-                .addComponent(btnCerrarSesion)
-                .addGap(44, 44, 44))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAltaPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAltaDoctor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCrearCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCerrarSesion, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
+                .addGap(66, 66, 66)
+                .addComponent(btnAltaDoctor)
+                .addGap(18, 18, 18)
+                .addComponent(btnAltaPaciente)
+                .addGap(18, 18, 18)
+                .addComponent(btnCrearCita)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addComponent(btnCerrarSesion)
-                .addContainerGap(440, Short.MAX_VALUE))
+                .addGap(72, 72, 72))
         );
 
         pack();
@@ -67,6 +96,23 @@ public class Menu extends javax.swing.JFrame {
         Login objectLogin = new Login();
         objectLogin.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnAltaDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaDoctorActionPerformed
+        // TODO add your handling code here:
+        AltaDoctor objectAltaDoctor = new AltaDoctor();
+        objectAltaDoctor.setVisible(true);
+        
+        dispose();
+    }//GEN-LAST:event_btnAltaDoctorActionPerformed
+
+    private void btnAltaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAltaPacienteActionPerformed
+        // TODO add your handling code here:
+        AltaPaciente objectAltaPaciente = new AltaPaciente();
+        objectAltaPaciente.setVisible(true);
+        
+        
+        dispose();
+    }//GEN-LAST:event_btnAltaPacienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -105,6 +151,9 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAltaDoctor;
+    private javax.swing.JButton btnAltaPaciente;
     private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JButton btnCrearCita;
     // End of variables declaration//GEN-END:variables
 }

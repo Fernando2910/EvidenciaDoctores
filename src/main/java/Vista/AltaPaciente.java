@@ -11,16 +11,13 @@ import Consultas.Consultas;
  *
  * @author Fer
  */
-public class AltaDoctor extends javax.swing.JFrame {
+public class AltaPaciente extends javax.swing.JFrame {
 
     /**
-     * Creates new form AltaDoctor
+     * Creates new form AltaPaciente
      */
-    public AltaDoctor() {
+    public AltaPaciente() {
         initComponents();
-        Consultas consultas = new Consultas();
-        consultas.MostrarDoctores(jtableListaDoctores);
-
     }
 
     /**
@@ -34,17 +31,15 @@ public class AltaDoctor extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        fieldNombreDoctor = new javax.swing.JTextField();
-        fieldEspecialidad = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        btnActualizarDatosDoctor = new javax.swing.JButton();
+        fieldNombrePaciente = new javax.swing.JTextField();
+        btnDarAltaPaciente = new javax.swing.JButton();
+        btnActualizarDatosPaciente = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        fieldDoctor = new javax.swing.JTextField();
+        fieldIdPaciente = new javax.swing.JTextField();
+        btnMenu = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtableListaDoctores = new javax.swing.JTable();
-        btnMenu = new javax.swing.JButton();
+        jtableListaPaciente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,33 +47,31 @@ public class AltaDoctor extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre:");
 
-        jLabel2.setText("Especialidad:");
-
-        fieldNombreDoctor.addActionListener(new java.awt.event.ActionListener() {
+        fieldNombrePaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldNombreDoctorActionPerformed(evt);
+                fieldNombrePacienteActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Dar de alta");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDarAltaPaciente.setText("Dar de alta");
+        btnDarAltaPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDarAltaPacienteActionPerformed(evt);
             }
         });
 
-        btnActualizarDatosDoctor.setText("Actualizar datos");
-        btnActualizarDatosDoctor.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizarDatosPaciente.setText("Actualizar datos");
+        btnActualizarDatosPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarDatosDoctorActionPerformed(evt);
+                btnActualizarDatosPacienteActionPerformed(evt);
             }
         });
 
-        jLabel3.setText("Id Doctor:");
+        jLabel3.setText("id Paciente:");
 
-        fieldDoctor.addActionListener(new java.awt.event.ActionListener() {
+        fieldIdPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldDoctorActionPerformed(evt);
+                fieldIdPacienteActionPerformed(evt);
             }
         });
 
@@ -92,20 +85,18 @@ public class AltaDoctor extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnActualizarDatosDoctor)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnActualizarDatosPaciente)
+                            .addComponent(btnDarAltaPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(82, 88, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldDoctor)
+                            .addComponent(fieldIdPaciente)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel3))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(fieldNombreDoctor)
-                            .addComponent(fieldEspecialidad))
+                                .addGap(0, 189, Short.MAX_VALUE))
+                            .addComponent(fieldNombrePaciente))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -114,25 +105,28 @@ public class AltaDoctor extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
-                .addComponent(fieldDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldIdPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(fieldNombreDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldNombrePaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btnDarAltaPaciente)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(fieldEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(btnActualizarDatosDoctor)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(btnActualizarDatosPaciente)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
+
+        btnMenu.setText("Menu");
+        btnMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista Doctores"));
 
-        jtableListaDoctores.setModel(new javax.swing.table.DefaultTableModel(
+        jtableListaPaciente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -143,12 +137,12 @@ public class AltaDoctor extends javax.swing.JFrame {
 
             }
         ));
-        jtableListaDoctores.addMouseListener(new java.awt.event.MouseAdapter() {
+        jtableListaPaciente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtableListaDoctoresMouseClicked(evt);
+                jtableListaPacienteMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jtableListaDoctores);
+        jScrollPane1.setViewportView(jtableListaPaciente);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -166,13 +160,6 @@ public class AltaDoctor extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                 .addContainerGap())
         );
-
-        btnMenu.setText("Menu");
-        btnMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,30 +182,45 @@ public class AltaDoctor extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(36, 36, 36)
                 .addComponent(btnMenu)
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fieldNombreDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNombreDoctorActionPerformed
+    private void fieldNombrePacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldNombrePacienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldNombreDoctorActionPerformed
+    }//GEN-LAST:event_fieldNombrePacienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnDarAltaPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarAltaPacienteActionPerformed
         // TODO add your handling code here:
         Consultas consultas = new Consultas();
-        
-        String NombreDoctor = fieldNombreDoctor.getText();
-        String Especialidad = fieldEspecialidad.getText();
+
+        String id = fieldIdPaciente.getText();
+        String nombre = fieldNombrePaciente.getText();
 
         //consultas.consultarUsuario(loggedInUser, PaswordContraseña.getText());
-        consultas.AgregarDoctor(NombreDoctor, Especialidad);
-        consultas.MostrarDoctores(jtableListaDoctores);
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+        consultas.AgregarPaciente(nombre);
+        consultas.MostrarPaciente(jtableListaPaciente);
+
+    }//GEN-LAST:event_btnDarAltaPacienteActionPerformed
+
+    private void btnActualizarDatosPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarDatosPacienteActionPerformed
+        // TODO add your handling code here:
+        Consultas consultas = new Consultas();
+
+        String id = fieldIdPaciente.getText();
+        String nombre = fieldNombrePaciente.getText();
+
+        consultas.ActualizarPaciente(id, nombre);
+        consultas.MostrarPaciente(jtableListaPaciente);
+    }//GEN-LAST:event_btnActualizarDatosPacienteActionPerformed
+
+    private void fieldIdPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdPacienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldIdPacienteActionPerformed
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
@@ -227,26 +229,11 @@ public class AltaDoctor extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnMenuActionPerformed
 
-    private void jtableListaDoctoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableListaDoctoresMouseClicked
+    private void jtableListaPacienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtableListaPacienteMouseClicked
         // TODO add your handling code here:
         Consultas consultas = new Consultas();
-        consultas.seleccionarDoctor(jtableListaDoctores, fieldDoctor, fieldNombreDoctor, fieldEspecialidad);
-    }//GEN-LAST:event_jtableListaDoctoresMouseClicked
-
-    private void btnActualizarDatosDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarDatosDoctorActionPerformed
-        // TODO add your handling code here:
-        Consultas consultas = new Consultas();
-        
-        String id = fieldDoctor.getText();
-        String nombre = fieldNombreDoctor.getText();
-        String especialidad = fieldEspecialidad.getText();
-        
-        consultas.ActualizarDoctor(id, nombre, especialidad);
-    }//GEN-LAST:event_btnActualizarDatosDoctorActionPerformed
-
-    private void fieldDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDoctorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldDoctorActionPerformed
+        consultas.seleccionarPaciente(jtableListaPaciente, fieldIdPaciente, fieldNombrePaciente);
+    }//GEN-LAST:event_jtableListaPacienteMouseClicked
 
     /**
      * @param args the command line arguments
@@ -265,37 +252,35 @@ public class AltaDoctor extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AltaDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AltaDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AltaDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AltaDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AltaPaciente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AltaDoctor().setVisible(true);
+                new AltaPaciente().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizarDatosDoctor;
+    private javax.swing.JButton btnActualizarDatosPaciente;
+    private javax.swing.JButton btnDarAltaPaciente;
     private javax.swing.JButton btnMenu;
-    private javax.swing.JTextField fieldDoctor;
-    private javax.swing.JTextField fieldEspecialidad;
-    private javax.swing.JTextField fieldNombreDoctor;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField fieldIdPaciente;
+    private javax.swing.JTextField fieldNombrePaciente;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtableListaDoctores;
+    private javax.swing.JTable jtableListaPaciente;
     // End of variables declaration//GEN-END:variables
 }
