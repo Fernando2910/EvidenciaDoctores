@@ -6,6 +6,7 @@
 package Vista;
 
 import Consultas.Consultas;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -134,10 +135,11 @@ public class Login extends javax.swing.JFrame {
 
     private void btnCrearCuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCuentaActionPerformed
         // TODO add your handling code here:
-        CrearCuenta crearCuenta = new CrearCuenta();
-        crearCuenta.setVisible(true);
-        
-        dispose();
+        JOptionPane.showMessageDialog(null, "Lo siento no tienes acceso a esta funcionalidad.");
+//        CrearCuenta crearCuenta = new CrearCuenta();
+//        crearCuenta.setVisible(true);
+//        
+//        dispose();
     }//GEN-LAST:event_btnCrearCuentaActionPerformed
 
     /**

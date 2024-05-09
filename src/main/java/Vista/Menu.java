@@ -56,6 +56,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btnCrearCita.setText("Crear cita");
+        btnCrearCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearCitaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,6 +118,14 @@ public class Menu extends javax.swing.JFrame {
         
         dispose();
     }//GEN-LAST:event_btnAltaPacienteActionPerformed
+
+    private void btnCrearCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCitaActionPerformed
+        // TODO add your handling code here:
+        CrearCita objectCita = new CrearCita();
+        objectCita.setVisible(true);
+        
+        dispose();
+    }//GEN-LAST:event_btnCrearCitaActionPerformed
 
     /**
      * @param args the command line arguments
